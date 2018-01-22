@@ -1,0 +1,31 @@
+<!--<div class="container">-->
+  <!--<input type="text" class="form-control mt-5" (keyup)="formEvent($event)">-->
+  <!--<p class="mt-2">{{text}}</p>-->
+<!--</div>-->
+
+<div class="container">
+  <form class="mt-5" #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="form-group">
+      <label>Name</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="userName"
+        name="userName"
+        #nameValue="ngModel"
+        minlength="4"
+        required
+      >
+    </div>
+    <div class="alert alert-danger" *ngIf="nameValue.errors?.required && nameValue.touched">Name required</div>
+    <div class="alert alert-danger" *ngIf="nameValue.errors?.minlength && nameValue.touched">Не менее 4 символов</div>
+    <button [disabled]="form.invalid" type="submit" class="btn btn-success">Save</button>
+  </form>
+<table class="table  mt-5" *ngIf="users.length">
+<tr *ngFor="let user of users; let i =index">
+  <td>{{ i + 1 }}</td>
+  <td>{{ user }}</td>
+  <td><button (click)="removeUser(i)" class="btn btn-danger">Delete</button></td>
+</tr>
+</table>
+</div>
